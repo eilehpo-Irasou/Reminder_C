@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 #ifndef __stack_h__
 #define __stack_h__
 
@@ -18,9 +17,19 @@ typedef enum
 - cellule qui  contient 
 un entier et un pointeur vers la cellule suivante.
 */
+
+typedef struct Player
+{
+	signed char username[256];
+	int health; 
+	int points; 
+	
+}Player;
+
+
 typedef struct StackElement
 {
-	int value; 
+	Player pl;
 	struct StackElement *next;
 
 }StackElement, *Stack;
@@ -29,10 +38,10 @@ typedef struct StackElement
 
 Stack new_stack(void);// creation d'une pile
 Bool is_empty_stack(Stack st); //verfie si pile vide
-Stack push_stack(Stack st, int integer); // push = pousser
+Stack push_stack(Stack st, Player pl1); // push = pousser
 Stack clear_stack(Stack st);// retourne pile vide
 Stack pop_stack(Stack st); // retire un element
-int top_stack(Stack st); // premier element 
+Player top_stack(Stack st); // premier element 
 int stack_length(Stack st);
 void print_stack(Stack st); // affiche pile
 

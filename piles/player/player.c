@@ -1,6 +1,6 @@
  #include <stdio.h>
 #include <stdlib.h>
-#include "piles.h"
+#include "player.h"
 
 /*
 
@@ -27,7 +27,7 @@ Bool is_empty_stack(Stack st)
 /********************/
 
 /* ajoute des elements*/
-Stack push_stack(Stack st, int integer)
+Stack push_stack(Stack st, Player p)
 {
 	StackElement *element; 
 	element = malloc(sizeof(*element));
@@ -39,7 +39,9 @@ Stack push_stack(Stack st, int integer)
 		/* code */
 	}
 
-	element->value = integer; 
+	strcpy(element->pl.username,p.username); 
+	element->pl.health = p.health;
+	element->pl.points = p.points;
 	element->next = st; 
 	return element; 
 }
@@ -85,14 +87,14 @@ Stack pop_stack(Stack st)
 }
 
 
-int top_stack(Stack st)
+Player top_stack(Stack st)
 {
 	if (is_empty_stack(st))
 	{
 		printf("any sommet\n");
-		return 0;
+		exit(EXIT_FAILURE);
 	}
-	return st->value;
+	return st->pl;
 }
 
 
@@ -119,7 +121,7 @@ void print_stack(Stack st)
 	while(!is_empty_stack(st))
 	{
 		
-			printf("Element [%d]\n",st->value );
+			printf("Player : %s health [%d] & points : %d\n",st->pl.username, st->pl.health, st->pl.points );
 		st = st->next;
 	}
 }
